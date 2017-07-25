@@ -10,7 +10,7 @@ export default class SliderItems extends Component {
     render() {
         let style = {
             width: (this.props.images.length+1) * 740 + 'px',
-            transitionDuration: '1s',
+            transitionDuration:this.props.speed + 's',
             left: this.props.index * -740 + 'px'
         }
         return (

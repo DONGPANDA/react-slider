@@ -19,4 +19,4 @@ const images = [
         src:require('./image/4.jpg')
     }
 ];
-ReactDOM.render(<Slider images={images}/>, document.querySelector("#root"))
+ReactDOM.render(<Slider autoPlay={true} delay={2} speed={1} arrows={true} dots={true} images={images}/>, document.querySelector("#root"))
