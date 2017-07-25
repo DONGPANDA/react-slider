@@ -4,10 +4,12 @@
 import React, {Component} from 'react';
 import './slider.less'
 import SliderItems from "./SliderItems";
+import SliderArrows from "./SliderArrows";
+import Dots from "./Dots";
 export default class Slider extends Component {
     constructor() {
         super();
-        this.state = {index: 0}
+        this.state = {index: 0,isMoving:false}
     }
 
     go = () => {
@@ -16,6 +18,8 @@ export default class Slider extends Component {
         }, this.props.delay*1000)
     }
     turn = (step) => {
+        if(this.state.isMoving) return;
+        this.setState({isMoving:true})
         let index = this.state.index + step;
         if (index > this.props.images.length) {
             this.sliders.style.transitionDuration = '0s';
@@ -24,6 +28,9 @@ export default class Slider extends Component {
             window.getComputedStyle(this.sliders, null).left;
             this.sliders.style.transitionDuration = this.props.speed + 's';
             this.setState({index});
+            setTimeout(()=>{
+                this.setState({isMoving:false})
+            },this.props.speed*1000)
             return;
         } else if (index < 0) {
             this.sliders.style.transitionDuration = '0s';
@@ -32,9 +39,15 @@ export default class Slider extends Component {
             index = this.props.images.length - 1;
             this.sliders.style.transitionDuration =this.props.speed + 's';
             this.setState({index});
+            setTimeout(()=>{
+                this.setState({isMoving:false})
+            },this.props.speed*1000)
             return
         }
         this.setState({index});
+        setTimeout(()=>{
+            this.setState({isMoving:false})
+        },this.props.speed*1000)
     }
     setSliders = (ref) => {
         this.sliders = ref
@@ -53,6 +66,8 @@ export default class Slider extends Component {
                  onMouseOut={this.go}
             >
                 <SliderItems speed={this.props.speed} setSliders={this.setSliders} images={this.props.images} index={this.state.index}/>
+                <SliderArrows turn={this.turn}/>
+                {this.props.dots?<Dots turn={this.turn} index={this.state.index} images={this.props.images}/>:null}
             </div>
         )
     }
