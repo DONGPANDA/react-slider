@@ -1,10 +1,11 @@
 {
   "name": "react-slider",
   "version": "1.0.0",
-  "description": "```\r npm init -y\r ```\r ## 安装模块",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",

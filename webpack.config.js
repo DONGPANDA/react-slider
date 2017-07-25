@@ -1,3 +1,26 @@
 /**
  * Created by 96004 on 2017/7/25.
  */
+let path=require('path');
+let HtmlWebpackPlugin= require('html-webpack-plugin');
+module.exports = {
+    entry: './app/index.js',
+    output: {
+        path: path.resolve('build'),
+        filename: "bundle.js"
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: "babel-loader",
+                exclude: /node_modules/
+            }
+        ]
+    },
+    plugins:[
+        new HtmlWebpackPlugin({
+            template: './app/index.html'
+        })
+    ]
+}
