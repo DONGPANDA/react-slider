@@ -4,11 +4,12 @@
 let path = require('path');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: './app/use.js',
+    entry: './combine/index.js',
     output: {
         path: path.resolve('build'),
         filename: "bundle.js"
     },
+    devtool: "source-map",
     module: {
         rules: [
             {
@@ -21,14 +22,18 @@ module.exports = {
                 use: ["style-loader", "css-loader", "less-loader"]
             },
             {
-                test: /\.(gif|png|jpg)$/,
+                test: /\.css/,
+                use: ["style-loader", "css-loader"]
+            },
+            {
+                test: /\.(gif|png|jpg|eot|woff|woff2|ttf|svg)$/,
                 use: "url-loader?limit=8192"
             }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './app/index.html'
+            template: './combine/index.html'
         })
     ]
 }
