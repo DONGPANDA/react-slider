@@ -4,7 +4,7 @@
 import React,{Component} from 'react';
 import {bindActionCreators} from 'redux';
 import actions from '../store/actions';
-import {connect} from '../react-redux';
+import {connect} from 'react-redux';
 class Counter extends Component{
     render() {
         return (
